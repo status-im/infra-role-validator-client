@@ -1,0 +1,4 @@
+# Allow non-root users logging in as nimbus user
+
+%{{ validator_client_group }} ALL= NOPASSWD: /bin/su – {{ validator_client_user }}
+%{{ validator_client_group }} ALL=({{ validator_client_user }}) NOPASSWD: ALL

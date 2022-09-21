@@ -1,0 +1,64 @@
+---
+validator_client_service_name: 'validator-client-{{ validator_client_network }}-{{ validator_client_repo_branch }}'
+validator_client_service_path: '/data/{{ validator_client_service_name }}'
+validator_client_data_path: '{{ validator_client_service_path }}/data'
+validator_client_logs_link: '{{ validator_client_service_path }}/logs'
+validator_client_secrets_path: '{{ validator_client_data_path }}/secrets'
+validator_client_validators_path: '{{ validator_client_data_path }}/validators'
+
+# Should be: nextPowerOfTwo(number_of_validators + 1024)
+validator_client_service_nofile_limit: 16384
+validator_client_user: 'nimbus'
+validator_client_group: 'staff'
+
+# Build timer
+validator_client_build_repo_path: '{{ validator_client_service_path }}/repo'
+validator_client_build_repo_url: 'https://github.com/status-im/nimbus-eth2'
+validator_client_build_repo_branch: 'stable'
+validator_client_build_service_name: 'build-{{ validator_client_service_name }}'
+validator_client_build_timer_enabled: true
+validator_client_build_timer_timeout: 3600
+validator_client_build_frequency: 'daily'
+validator_client_build_days_kept: 3
+validator_client_build_jobs: '{{ ansible_processor_vcpus / 2 | round(0, "ceil") }}'
+validator_client_build_log_level: 'TRACE'
+validator_client_build_restarts_service: true
+validator_client_build_nim_commit: '' # Defaults to what nimbus-build-system uses.
+validator_client_build_nim_flags: >-
+  -d:noSignalHandler
+
+# General
+validator_client_network: 'mainnet'
+validator_client_valid_network_names: ["mainnet", "prater", "kiln", "sepolia"]
+validator_client_log_level: 'INFO' # TRACE DEBUG INFO NOTICE WARN ERROR FATAL NONE
+validator_client_log_format: 'json' # auto colors nocolors json none
+validator_client_doppelganger_detection: true
+validator_client_doppelganger_exit_code: 129
+validator_client_extra_flags: []
+
+# Beacon Node REST API URL address
+validator_client_beacon_node_url: 'http://127.0.0.1:5052'
+
+# Prometheus metrics endpoint
+validator_client_metrics_enabled: true
+validator_client_metrics_address: '0.0.0.0'
+validator_client_metrics_port: 8108
+
+# REST Keymanager API
+validator_client_keymanager_enabled: false
+validator_client_keymanager_address: '127.0.0.1'
+validator_client_keymanager_port: 5052
+
+# Automatically distribute validators
+validator_client_dist_validators_enabled: false
+validator_client_dist_validators_name: '{{ validator_client_network }}_deposits'
+validator_client_dist_validators_sec_path: '{{ validator_client_secrets_path }}'
+validator_client_dist_validators_val_path: '{{ validator_client_validators_path }}'
+#validator_client_dist_validators_name: ~
+#validator_client_dist_validators_start: ~
+#validator_client_dist_validators_end: ~
+
+# Consul service definition settings
+validator_client_consul_service_name: 'validator-client'
+validator_client_consul_service_file_name: '{{ validator_client_service_name | replace("-", "_") }}'
+validator_client_consul_metrics_service_name: '{{ validator_client_consul_service_name }}-metrics'

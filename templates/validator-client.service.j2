@@ -1,0 +1,44 @@
+[Unit]
+Description=Validator Client node on {{ validator_client_network }} network ({{ validator_client_repo_branch }})
+Documentation=https://github.com/status-im/nimbus-eth2
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+User={{ validator_client_user }}
+Group={{ validator_client_group }}
+LimitNOFILE={{ validator_client_service_nofile_limit }}
+WorkingDirectory={{ validator_client_service_path }}
+SyslogIdentifier={{ validator_client_service_name }}
+SyslogFacility=local6
+SyslogLevel=debug
+Restart=on-failure
+RestartPreventExitStatus={{ validator_client_doppelganger_exit_code }}
+ExecStart={{ validator_client_repo_path }}/build/nimbus_validator_client \
+    --network={{ validator_client_network }} \
+    --data-dir={{ validator_client_data_path }} \
+    --secrets-dir={{ validator_client_secrets_path }} \
+    --validators-dir={{ validator_client_validators_path }} \
+    --era-dir={{ validator_client_era_dir_path }} \
+    --log-format={{ validator_client_log_format }} \
+    --log-level={{ validator_client_log_level }} \
+    --doppelganger-detection={{ validator_client_doppelganger_detection | to_json }} \
+    --beacon-node={{ validator_client_beacon_node_url }} \
+    --keymanager={{ validator_client_keymanager_enabled | to_json }} \
+{% if validator_client_keymanager_enabled %}
+    --keymanager-address={{ validator_client_keymanager_address }} \
+    --keymanager-port={{ validator_client_keymanager_port }} \
+    --keymanager-allow-origin={{ TODO | mandatory }} \
+    --keymanager-token-file={{ TODO | mandatory }} \
+{% endif %}
+    --metrics={{ validator_client_metrics_enabled | to_json }} \
+{% if validator_client_metrics_enabled %}
+    --metrics-address={{ validator_client_metrics_address }} \
+    --metrics-port={{ validator_client_metrics_port }} \
+{% endif %}
+{% for extra_flag in validator_client_extra_flags %}
+    {{ extra_flag }}
+{% endfor %}
+
+[Install]
+WantedBy=multi-user.target

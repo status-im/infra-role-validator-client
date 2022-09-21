@@ -9,4 +9,7 @@ galaxy_info:
     - name: Ubuntu
       versions:
         - xenial
-  dependencies: []
+  dependencies:
+    - name: systemd-timer
+      src: git+git@github.com:status-im/infra-role-systemd-timer.git
+      scm: git

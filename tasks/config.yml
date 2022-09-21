@@ -1,0 +1,23 @@
+---
+- name: Create service directories
+  file:
+    path:  '{{ item.path }}'
+    owner: '{{ validator_client_user }}'
+    group: '{{ validator_client_group }}'
+    state: 'directory'
+    mode:  '{{ item.mode }}'
+  with_items:
+    - { path: '{{ validator_client_service_path }}',    mode: '0750' }
+    - { path: '{{ validator_client_secrets_path }}',    mode: '0700' }
+    - { path: '{{ validator_client_validators_path }}', mode: '0700' }
+    - { path: '{{ validator_client_data_path }}',       mode: '0700' }
+
+- name: Create helper scripts
+  template:
+    src:     '{{ item }}'
+    dest:    '{{ validator_client_service_path }}/{{ item|basename|replace(".j2", "") }}'
+    owner:   '{{ validator_client_user }}'
+    group:   '{{ validator_client_group }}'
+    mode:    0750
+  with_fileglob:
+    - 'templates/scripts/*'
