@@ -1,13 +1,12 @@
 ---
 validator_client_service_name: 'validator-client-{{ validator_client_network }}-{{ validator_client_repo_branch }}'
 validator_client_service_path: '/data/{{ validator_client_service_name }}'
+validator_client_service_nofile_limit: 16384 # nextPowerOfTwo(number_of_validators + 1024)
 validator_client_data_path: '{{ validator_client_service_path }}/data'
 validator_client_logs_link: '{{ validator_client_service_path }}/logs'
 validator_client_secrets_path: '{{ validator_client_data_path }}/secrets'
 validator_client_validators_path: '{{ validator_client_data_path }}/validators'
 
-# Should be: nextPowerOfTwo(number_of_validators + 1024)
-validator_client_service_nofile_limit: 16384
 validator_client_user: 'nimbus'
 validator_client_group: 'staff'
 
@@ -45,7 +44,7 @@ validator_client_metrics_address: '0.0.0.0'
 validator_client_metrics_port: 8108
 
 # REST Keymanager API
-validator_client_keymanager_enabled: false
+validator_client_keymanager_enabled: true
 validator_client_keymanager_address: '127.0.0.1'
 validator_client_keymanager_port: 5052
 
