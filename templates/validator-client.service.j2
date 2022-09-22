@@ -15,7 +15,6 @@ SyslogLevel=debug
 Restart=on-failure
 RestartPreventExitStatus={{ validator_client_doppelganger_exit_code }}
 ExecStart={{ validator_client_repo_path }}/build/nimbus_validator_client \
-    --network={{ validator_client_network }} \
     --data-dir={{ validator_client_data_path }} \
     --secrets-dir={{ validator_client_secrets_path }} \
     --validators-dir={{ validator_client_validators_path }} \
