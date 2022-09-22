@@ -1,0 +1,20 @@
+---
+- name: 'Distribute validators and secrets'
+  include_role: name=infra-role-dist-validators
+  vars:
+    dist_validators_name:     '{{ validator_client_dist_validators_name }}'
+    dist_validators_user:     '{{ validator_client_user }}'
+    dist_validators_start:    '{{ validator_client_dist_validators_start | mandatory }}'
+    dist_validators_end:      '{{ validator_client_dist_validators_end | mandatory }}'
+    dist_validators_sec_path: '{{ validator_client_dist_validators_sec_path | mandatory }}'
+    dist_validators_val_path: '{{ validator_client_dist_validators_val_path | mandatory }}'
+
+- when: dist_validators_deployed is defined
+  block:
+    - name: 'Show number of validators deployed'
+      debug: msg='Deployed {{ dist_validators_deployed }} validators'
+
+    - name: 'Restart validator client service'
+      service:
+        name: '{{ validator_client_service_name }}.service'
+        state: 'restarted'
