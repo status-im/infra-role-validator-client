@@ -10,6 +10,9 @@ galaxy_info:
       versions:
         - xenial
   dependencies:
+    - name: consul-service
+      src: git+git@github.com:status-im/infra-role-consul-service.git
+      scm: git
     - name: open-ports
       src: git+git@github.com:status-im/infra-role-open-ports.git
       scm: git
