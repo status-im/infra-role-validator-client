@@ -2,7 +2,7 @@
 - name: Clone repo branch
   git:
     repo: '{{ validator_client_repo_url }}'
-    version: '{{ validator_client_repo_branch }}'
+    version: '{{ validator_client_build_repo_branch }}'
     dest: '{{ validator_client_repo_path }}'
     force: true
     update: true
