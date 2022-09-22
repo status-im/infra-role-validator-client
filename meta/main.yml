@@ -10,6 +10,9 @@ galaxy_info:
       versions:
         - xenial
   dependencies:
+    - name: open-ports
+      src: git+git@github.com:status-im/infra-role-open-ports.git
+      scm: git
     - name: systemd-timer
       src: git+git@github.com:status-im/infra-role-systemd-timer.git
       scm: git
