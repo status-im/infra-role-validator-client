@@ -1,16 +1,16 @@
 ---
 - name: Clone repo branch
   git:
-    repo: '{{ validator_client_repo_url }}'
+    repo: '{{ validator_client_build_repo_url }}'
     version: '{{ validator_client_build_repo_branch }}'
-    dest: '{{ validator_client_repo_path }}'
+    dest: '{{ validator_client_build_repo_path }}'
     force: true
     update: true
   become_user: '{{ validator_client_user }}'
 
 - name: Check if node binary exists
   stat:
-    path: '{{ validator_client_repo_path }}/build/nimbus_validator_client'
+    path: '{{ validator_client_build_repo_path }}/build/nimbus_validator_client'
   register: validator_client_bin
 
 - name: Create timer for build script
