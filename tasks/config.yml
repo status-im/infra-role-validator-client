@@ -12,6 +12,15 @@
     - { path: '{{ validator_client_validators_path }}', mode: '0700' }
     - { path: '{{ validator_client_data_path }}',       mode: '0700' }
 
+- name: Create Keymanager token file
+  when: validator_client_keymanager_enabled
+  copy:
+    dest:    '{{ validator_client_keymanager_token_file }}'
+    content: '{{ validator_client_keymanager_token | mandatory }}'
+    owner:   '{{ validator_client_user }}'
+    group:   '{{ validator_client_group }}'
+    mode:    0600
+
 - name: Create helper scripts
   template:
     src:     '{{ item }}'

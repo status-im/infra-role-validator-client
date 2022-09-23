@@ -26,8 +26,8 @@ ExecStart={{ validator_client_build_repo_path }}/build/nimbus_validator_client \
 {% if validator_client_keymanager_enabled %}
     --keymanager-address={{ validator_client_keymanager_address }} \
     --keymanager-port={{ validator_client_keymanager_port }} \
-    --keymanager-allow-origin={{ TODO | mandatory }} \
-    --keymanager-token-file={{ TODO | mandatory }} \
+    --keymanager-allow-origin={{ validator_client_keymanager_allow_origin | join(",") }} \
+    --keymanager-token-file={{ validator_client_keymanager_token_file | mandatory }} \
 {% endif %}
     --metrics={{ validator_client_metrics_enabled | to_json }} \
 {% if validator_client_metrics_enabled %}

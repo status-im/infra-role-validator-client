@@ -44,9 +44,12 @@ validator_client_metrics_address: '0.0.0.0'
 validator_client_metrics_port: 8108
 
 # REST Keymanager API
-validator_client_keymanager_enabled: true
+validator_client_keymanager_enabled: false
 validator_client_keymanager_address: '127.0.0.1'
 validator_client_keymanager_port: 5052
+validator_client_keymanager_allow_origin: ['localhost', '{{ hostname }}', '{{ hostname }}.wg']
+validator_client_keymanager_token_file: '{{ validator_client_service_path }}/keymanager.token'
+#validator_client_keymanager_token: 'super-secret-token'
 
 # Automatically distribute validators
 validator_client_dist_validators_enabled: false
