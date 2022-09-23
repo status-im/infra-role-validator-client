@@ -14,12 +14,12 @@
 
 - name: Sudoers file to let non-root users start jobs
   template:
-    src: 'builds_sudoers.j2'
+    src: 'sudo/builds.j2'
     dest: '/etc/sudoers.d/82-{{ validator_client_service_name }}-builds'
     mode: 0440
 
 - name: Sudoers file for login as nimbus user
   template:
-    src: 'nimbus_sudoers.j2'
+    src: 'sudo/nimbus.j2'
     dest: '/etc/sudoers.d/83-{{ validator_client_service_name }}-login'
     mode: 0440
