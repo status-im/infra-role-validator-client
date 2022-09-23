@@ -18,7 +18,6 @@ ExecStart={{ validator_client_build_repo_path }}/build/nimbus_validator_client \
     --data-dir={{ validator_client_data_path }} \
     --secrets-dir={{ validator_client_secrets_path }} \
     --validators-dir={{ validator_client_validators_path }} \
-    --era-dir={{ validator_client_era_dir_path }} \
     --log-format={{ validator_client_log_format }} \
     --log-level={{ validator_client_log_level }} \
     --doppelganger-detection={{ validator_client_doppelganger_detection | to_json }} \
