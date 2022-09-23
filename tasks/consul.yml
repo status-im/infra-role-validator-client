@@ -11,8 +11,8 @@
         tags: ['{{ env }}.{{ stage }}', 'nimbus', 'validator']
         checks:
           - id:   '{{ validator_client_service_name }}-health'
-            type: 'http'
-            http: 'http://localhost:{{ validator_client_keymanager_port }}/eth/v1/node/version'
+            type: 'tcp'
+            tcp: 'localhost:{{ validator_client_keymanager_port }}'
 
       - id:   '{{ validator_client_service_name }}-metrics'
         name: '{{ validator_client_consul_metrics_service_name }}'
