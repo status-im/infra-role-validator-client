@@ -13,6 +13,7 @@
           - id:   '{{ validator_client_service_name }}-health'
             type: 'tcp'
             tcp: 'localhost:{{ validator_client_keymanager_port }}'
+            disabled: '{{ not validator_client_service_enabled }}'
 
       - id:   '{{ validator_client_service_name }}-metrics'
         name: '{{ validator_client_consul_metrics_service_name }}'
@@ -25,3 +26,4 @@
           - id:   '{{ validator_client_service_name }}-metrics-health'
             type: 'http'
             http: 'http://localhost:{{ validator_client_metrics_port }}/health'
+            disabled: '{{ not validator_client_service_enabled }}'

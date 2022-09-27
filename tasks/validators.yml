@@ -15,6 +15,7 @@
       debug: msg='Deployed {{ dist_validators_deployed }} validators'
 
     - name: 'Restart validator client service'
+      when: validator_client_service_enabled
       service:
         name: '{{ validator_client_service_name }}.service'
         state: 'restarted'

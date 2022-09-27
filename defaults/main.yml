@@ -1,6 +1,7 @@
 ---
 validator_client_service_name: 'validator-client-{{ validator_client_network }}-{{ validator_client_build_repo_branch }}'
 validator_client_service_path: '/data/{{ validator_client_service_name }}'
+validator_client_service_enabled: true
 validator_client_service_nofile_limit: 16384 # nextPowerOfTwo(number_of_validators + 1024)
 validator_client_data_path: '{{ validator_client_service_path }}/data'
 validator_client_logs_link: '{{ validator_client_service_path }}/logs'

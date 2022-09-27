@@ -16,8 +16,9 @@
 - name: Reload and restart the service
   systemd:
     name: '{{ validator_client_service_name }}.service'
-    enabled: true
+    enabled: '{{ validator_client_service_enabled }}'
     daemon_reload: true
     state: |-
-      {{ validator_client_service_definition.changed
-       | ternary("restarted", "started") }}
+      {{ (not validator_client_service_enabled)     | ternary("stopped",
+        validator_client_service_definition.changed | ternary("restarted",
+                                                              "started")) }}
