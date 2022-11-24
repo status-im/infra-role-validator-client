@@ -39,6 +39,9 @@ validator_client_extra_flags: []
 # Beacon Node REST API URL address
 validator_client_beacon_node_url: 'http://127.0.0.1:5052'
 
+# Builder for profit-optimized execution payloads.
+validator_client_payload_builder_enabled: false
+
 # Prometheus metrics endpoint
 validator_client_metrics_enabled: true
 validator_client_metrics_address: '0.0.0.0'

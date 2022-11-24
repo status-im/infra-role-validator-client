@@ -22,6 +22,7 @@ ExecStart={{ validator_client_build_repo_path }}/build/nimbus_validator_client \
     --log-level={{ validator_client_log_level }} \
     --doppelganger-detection={{ validator_client_doppelganger_detection | to_json }} \
     --beacon-node={{ validator_client_beacon_node_url }} \
+    --payload-builder={{ validator_client_payload_builder_enabled | to_json }} \
     --keymanager={{ validator_client_keymanager_enabled | to_json }} \
 {% if validator_client_keymanager_enabled %}
     --keymanager-address={{ validator_client_keymanager_address }} \
