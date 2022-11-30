@@ -24,6 +24,9 @@ ExecStart={{ validator_client_build_repo_path }}/build/nimbus_validator_client \
     --beacon-node={{ validator_client_beacon_node_url }} \
     --payload-builder={{ validator_client_payload_builder_enabled | to_json }} \
     --keymanager={{ validator_client_keymanager_enabled | to_json }} \
+{% if validator_client_suggested_fee_recipient is defined %}
+    --suggested-fee-recipient={{ validator_client_suggested_fee_recipient | mandatory }} \
+{% endif %}
 {% if validator_client_keymanager_enabled %}
     --keymanager-address={{ validator_client_keymanager_address }} \
     --keymanager-port={{ validator_client_keymanager_port }} \
