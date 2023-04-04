@@ -20,6 +20,7 @@
         port: '{{ validator_client_metrics_port }}'
         address: '{{ ansible_local.wireguard.vpn_ip }}'
         tags: ['{{ env }}.{{ stage }}', 'nimbus', 'validator', 'metrics']
+        disabled: '{{ not validator_client_service_enabled or not validator_client_metrics_enabled }}'
         meta:
           container: '{{ validator_client_service_name }}'
         checks:
