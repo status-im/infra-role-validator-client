@@ -19,8 +19,8 @@ function fetchChanges() {
 function buildBinaries() {
     # Control number of jobs used to lower impact on running nodes
     export MAKEFLAGS="-j{{ validator_client_build_jobs | int }}"
-{% if validator_client_nim_commit is defined and validator_client_nim_commit != "" %}
-    export NIM_COMMIT={{ validator_client_nim_commit }}
+{% if validator_client_build_nim_commit is defined and validator_client_build_nim_commit != "" %}
+    export NIM_COMMIT={{ validator_client_build_nim_commit }}
 {% endif %}
 
     make update OVERRIDE=1
