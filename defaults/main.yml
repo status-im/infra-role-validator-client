@@ -48,7 +48,7 @@ validator_client_metrics_address: '0.0.0.0'
 validator_client_metrics_port: 8108
 
 # Suggests it to the Execution Layer client and the builder network.
-#beacon_node_suggested_fee_recipient: ~
+#validator_client_suggested_fee_recipient: ~
 
 # REST Keymanager API
 validator_client_keymanager_enabled: false
@@ -71,3 +71,9 @@ validator_client_dist_validators_val_path: '{{ validator_client_validators_path 
 validator_client_consul_service_name: 'validator-client'
 validator_client_consul_service_file_name: '{{ validator_client_service_name | replace("-", "_") }}'
 validator_client_consul_metrics_service_name: '{{ validator_client_consul_service_name }}-metrics'
+validator_client_consul_check_disabled: false
+validator_client_consul_check_interval: '60s'
+validator_client_consul_check_timeout: '5s'
+validator_client_consul_success_before_passing: 0
+validator_client_consul_failures_before_warning: 1
+validator_client_consul_failures_before_critical: 2
