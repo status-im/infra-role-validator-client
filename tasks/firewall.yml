@@ -1,9 +1,0 @@
----
-- name: Open service ports in iptables
-  include_role: name=infra-role-open-ports
-  vars:
-    open_ports_default_comment: '{{ validator_client_service_name }}'
-    open_ports_default_chain: 'VPN'
-    open_ports_list:
-      - { port: '{{ validator_client_metrics_port }}',    ipset: 'metrics.hq' }
-      - { port: '{{ validator_client_keymanager_port }}', ipset: '{{ env }}.{{ stage }}' }

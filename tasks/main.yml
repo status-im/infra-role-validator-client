@@ -6,5 +6,4 @@
 - include_tasks: service.yml
 - import_tasks: validators.yml
   when: validator_client_dist_validators_enabled
-- include_tasks: firewall.yml
 - include_tasks: consul.yml
