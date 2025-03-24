@@ -34,7 +34,7 @@ The crucial settings are:
 validator_client_service_name: 'validator-client-{{ validator_client_network }}-{{ validator_client_network }}'
 validator_client_network: 'mainnet'
 validator_client_build_repo_branch: 'stable'
-validator_client_beacon_node_url: 'http://127.0.0.1:5052'
+validator_client_beacon_node_url: ['http://127.0.0.1:5052']
 validator_client_suggested_fee_recipient: '0xChangeMeToAddrThatWillReceiveTrasnactionFeeRewards'
 ```
 You might want to change logging level or enable payload builder if beacon node has it:

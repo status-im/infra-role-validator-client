@@ -37,7 +37,7 @@ validator_client_doppelganger_exit_code: 129
 validator_client_extra_flags: []
 
 # Beacon Node REST API URL address
-validator_client_beacon_node_url: 'http://127.0.0.1:5052'
+validator_client_beacon_node_urls: ['http://127.0.0.1:5052']
 
 # Builder for profit-optimized execution payloads.
 validator_client_payload_builder_enabled: false
