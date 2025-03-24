@@ -1,0 +1,5 @@
+---
+- name: Verify network name
+  assert:
+    that: '{{ validator_client_network in validator_client_valid_network_names }}'
+    quiet: true

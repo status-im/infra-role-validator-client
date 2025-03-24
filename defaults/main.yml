@@ -29,7 +29,7 @@ validator_client_build_nim_flags: >-
 
 # General
 validator_client_network: 'mainnet'
-validator_client_valid_network_names: ["mainnet", "prater", "kiln", "sepolia"]
+validator_client_valid_network_names: ['holesky', 'hoodi', 'mainnet', 'sepolia']
 validator_client_log_level: 'INFO' # TRACE DEBUG INFO NOTICE WARN ERROR FATAL NONE
 validator_client_log_format: 'json' # auto colors nocolors json none
 validator_client_doppelganger_detection: true
