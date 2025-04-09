@@ -20,7 +20,7 @@
     systemd_timer_user: '{{ validator_client_user }}'
     systemd_timer_group: '{{ validator_client_group }}'
     systemd_timer_description: 'Build {{ validator_client_service_name }}'
-    systemd_timer_start_on_creation: '{{ not validator_client_bin.stat.exists }}'
+    systemd_timer_start_on_creation: '{{ validator_client_build_start_on_creation and not validator_client_bin.stat.exists }}'
     systemd_timer_ionice_class: 'idle'
     systemd_timer_consul_warning: true
     systemd_timer_enabled: '{{ validator_client_build_timer_enabled }}'
