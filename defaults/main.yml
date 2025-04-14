@@ -8,6 +8,12 @@ validator_client_logs_link: '{{ validator_client_service_path }}/logs'
 validator_client_secrets_path: '{{ validator_client_data_path }}/secrets'
 validator_client_validators_path: '{{ validator_client_data_path }}/validators'
 
+# Ability to prevernt restarts after service changes.
+# This is higher priority, than force_restart.
+validator_client_service_allow_restart: true
+# Force restart service on each ansible playbook run
+validator_client_service_force_restart: false
+
 validator_client_user: 'nimbus'
 validator_client_group: 'staff'
 

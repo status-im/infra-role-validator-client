@@ -19,6 +19,9 @@
     enabled: '{{ validator_client_service_enabled }}'
     daemon_reload: true
     state: |-
-      {{ (not validator_client_service_enabled)     | ternary("stopped",
-        validator_client_service_definition.changed | ternary("restarted",
-                                                              "started")) }}
+      {{ (
+        validator_client_service_allow_restart
+      and (
+        validator_client_service_definition.changed or
+        validator_client_service_force_restart
+      )) | ternary("restarted", "started") }}

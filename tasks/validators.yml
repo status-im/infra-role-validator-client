@@ -18,4 +18,4 @@
       when: validator_client_service_enabled
       service:
         name: '{{ validator_client_service_name }}.service'
-        state: 'restarted'
+        state: '{{ validator_client_service_allow_restart | ternary("restarted", "started") }}'
