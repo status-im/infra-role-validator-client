@@ -15,7 +15,7 @@ function dots() {
 }
 
 SERVICE='{{ validator_client_service_name }}.service'
-METRICS_ADDR='localhost:{{ validator_client_metrics_port }}'
+METRICS_ADDR='{{ validator_client_beacon_node_metrics_addr }}'
 INTERVAL_SECONDS=1
 SECONDS_REQUIRED="${1:-60}"
 UNCHANGED_COUNT=0
