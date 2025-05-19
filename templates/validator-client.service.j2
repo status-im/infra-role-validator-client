@@ -1,5 +1,5 @@
 [Unit]
-Description=Validator Client node on {{ validator_client_network }} network ({{ validator_client_build_repo_branch }})
+Description=Validator Client node on {{ validator_client_network }} network ({{ validator_client_repo_branch }})
 Documentation=https://github.com/status-im/nimbus-eth2
 Requires=network-online.target
 After=network-online.target
@@ -14,7 +14,7 @@ SyslogFacility=local6
 SyslogLevel=debug
 Restart=on-failure
 RestartPreventExitStatus={{ validator_client_doppelganger_exit_code }}
-ExecStart={{ validator_client_build_repo_path }}/build/nimbus_validator_client \
+ExecStart={{ validator_client_bin_path }}/nimbus_validator_client \
     --data-dir={{ validator_client_data_path }} \
     --secrets-dir={{ validator_client_secrets_path }} \
     --validators-dir={{ validator_client_validators_path }} \

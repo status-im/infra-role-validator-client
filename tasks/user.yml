@@ -1,5 +1,5 @@
 ---
-- name: Create user for beacon node builds
+- name: Create user for validator client builds
   user:
     name: '{{ validator_client_user }}'
     group: '{{ validator_client_group }}'

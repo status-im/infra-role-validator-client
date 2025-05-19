@@ -11,6 +11,7 @@
     - { path: '{{ validator_client_secrets_path }}',    mode: '0700' }
     - { path: '{{ validator_client_validators_path }}', mode: '0700' }
     - { path: '{{ validator_client_data_path }}',       mode: '0700' }
+    - { path: '{{ validator_client_bin_path }}',        mode: '0755' }
 
 - name: Create Keymanager token file
   when: validator_client_keymanager_enabled

@@ -33,7 +33,7 @@ The crucial settings are:
 ```yaml
 validator_client_service_name: 'validator-client-{{ validator_client_network }}-{{ validator_client_network }}'
 validator_client_network: 'mainnet'
-validator_client_build_repo_branch: 'stable'
+validator_client_repo_branch: 'stable'
 validator_client_beacon_node_url: ['http://127.0.0.1:5052']
 validator_client_suggested_fee_recipient: '0xChangeMeToAddrThatWillReceiveTrasnactionFeeRewards'
 ```
@@ -70,9 +70,9 @@ A timer will be installed to build the image:
 ```sh
  > sudo systemctl list-units --type=service '*validator-client-*'
   UNIT                                LOAD   ACTIVE SUB     DESCRIPTION
-  validator-client-mainnet-stable.service   loaded active running Nimbus Beacon Node on mainnet network (stable)
-  validator-client-mainnet-testing.service  loaded active running Nimbus Beacon Node on mainnet network (testing)
-  validator-client-mainnet-unstable.service loaded active running Nimbus Beacon Node on mainnet network (unstable)
+  validator-client-mainnet-stable.service   loaded active running Validator Client on mainnet network (stable)
+  validator-client-mainnet-testing.service  loaded active running Validator Client on mainnet network (testing)
+  validator-client-mainnet-unstable.service loaded active running Validator Client on mainnet network (unstable)
 ```
 To rebuild the image:
 ```sh
