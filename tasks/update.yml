@@ -21,9 +21,9 @@
     systemd_timer_description: 'Update {{ validator_client_service_name }}'
     systemd_timer_user: '{{ validator_client_user }}'
     systemd_timer_group: '{{ validator_client_group }}'
-    systemd_timer_start_on_creation: >
+    systemd_timer_start_on_creation: |-
       {{ validator_client_update_start_on_creation and
-      not validator_client_bin.stat.exists }}'
+        not validator_client_bin.stat.exists }}
     systemd_timer_ionice_class: 'idle'
     systemd_timer_consul_warning: true
     systemd_timer_enabled: '{{ validator_client_update_timer_enabled }}'
