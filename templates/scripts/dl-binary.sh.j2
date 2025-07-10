@@ -66,5 +66,15 @@ else
   downloadAndInstallBinary "${latestBinaryName/.tar.gz}"
 fi
 
-echo " >>> Restarting service ${VALIDATOR_CLIENT_SERVICE} ..."
-sudo systemctl restart "${VALIDATOR_CLIENT_SERVICE}"
+{% if validator_client_update_restarts_service %}
+# Avoid faiure on first Ansible run due to missing service.
+if [[ $(systemctl is-active "${VALIDATOR_CLIENT_SERVICE}" || true) == "inactive" ]]; then
+    echo " !!! No service to restart!"
+    exit
+else
+    echo " >>> Restarting service..."
+    sudo systemctl restart "${VALIDATOR_CLIENT_SERVICE}"
+fi
+
+{% endif %}
+echo " >>> SUCCESS"
