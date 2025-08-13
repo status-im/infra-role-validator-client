@@ -3,12 +3,12 @@
   include_role: name=infra-role-consul-service
   vars:
     consul_config_name:              '{{ validator_client_consul_service_file_name }}'
-    consul_check_disabled:           '{{ validator_client_consul_check_disabled }}'
-    consul_check_interval:           '{{ validator_client_consul_check_interval }}'
-    consul_check_timeout:            '{{ validator_client_consul_check_timeout }}'
-    consul_success_before_passing:   '{{ validator_client_consul_success_before_passing }}'
-    consul_failures_before_warning:  '{{ validator_client_consul_failures_before_warning }}'
-    consul_failures_before_critical: '{{ validator_client_consul_failures_before_critical }}'
+    consul_default_check_disabled:           '{{ validator_client_consul_check_disabled }}'
+    consul_default_check_interval:           '{{ validator_client_consul_check_interval }}'
+    consul_default_check_timeout:            '{{ validator_client_consul_check_timeout }}'
+    consul_default_success_before_passing:   '{{ validator_client_consul_success_before_passing }}'
+    consul_default_failures_before_warning:  '{{ validator_client_consul_failures_before_warning }}'
+    consul_default_failures_before_critical: '{{ validator_client_consul_failures_before_critical }}'
     consul_services:
       - id:   '{{ validator_client_service_name }}'
         name: '{{ validator_client_consul_service_name }}'
