@@ -1,14 +1,4 @@
 ---
-- name: Clone repo branch
-  git:
-    repo: '{{ validator_client_repo_url }}'
-    version: '{{ validator_client_repo_branch }}'
-    dest: '{{ validator_client_repo_path }}'
-    force: true
-    update: true
-  become_user: '{{ validator_client_user }}'
-  when: validator_client_update_build
-
 - name: Check if node binary exists
   stat:
     path: '{{ validator_client_bin_path }}/nimbus_validator_client'
@@ -30,6 +20,7 @@
     systemd_timer_frequency: '{{ validator_client_update_frequency }}'
     systemd_timer_timeout_sec: '{{ validator_client_update_timer_timeout }}'
     systemd_timer_work_dir: '{{ validator_client_service_path }}'
-    systemd_timer_script_path: |-
-      {{ validator_client_update_build_script if validator_client_update_build == true
-        else validator_client_update_download_script }}
+    systemd_timer_script_path: '/nix/var/nix/profiles/default/bin/nix'
+    systemd_timer_script_args: 'build --refresh "{{ validator_client_nix_repo_url }}?submodules=1&ref={{ validator_client_repo_branch }}#validator_client"'
+    systemd_timer_exec_start_post:
+      - '+/bin/systemctl restart {{ validator_client_service_name }}.service'

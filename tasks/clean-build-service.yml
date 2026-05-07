@@ -11,15 +11,6 @@
     enabled: false
   when: systemd_service_build_timer.stat.exists
 
-# Allow to run the validator client if the binary is build from source
-- name: Create a symlink with the build binary
-  file:
-    src: '{{ validator_client_repo_path }}/build/nimbus_validator_client'
-    dest: '{{ validator_client_bin_path }}/nimbus_validator_client'
-    state: link
-  when: validator_client_update_build
-  ignore_errors: yes
-
 - name: Remove build service, timer and consul definition
   file:
     path: '{{ item }}'

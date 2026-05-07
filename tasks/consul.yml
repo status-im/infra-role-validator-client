@@ -20,6 +20,17 @@
             type: 'tcp'
             tcp: 'localhost:{{ validator_client_keymanager_port }}'
             disabled: '{{ not validator_client_keymanager_enabled }}'
+          - id:   '{{ validator_client_service_name }}-commit-freshness'
+            type: 'script'
+            script: >-
+              check-commit-vc
+              -r {{ validator_client_repo }}
+              -b {{ validator_client_repo_branch }}
+              -p {{ validator_client_metrics_port }}
+              -w {{ validator_client_consul_commit_warn_age }}
+              -c {{ validator_client_consul_commit_crit_age }}
+            interval: '30m'
+            timeout: '30s'
 
       - id:   '{{ validator_client_service_name }}-metrics'
         name: '{{ validator_client_consul_metrics_service_name }}'

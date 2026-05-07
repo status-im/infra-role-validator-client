@@ -5,7 +5,7 @@ validator_client_service_enabled: true
 validator_client_service_nofile_limit: 16384 # nextPowerOfTwo(number_of_validators + 1024)
 validator_client_data_path: '{{ validator_client_service_path }}/data'
 validator_client_repo_path: '{{ validator_client_service_path }}/repo'
-validator_client_bin_path: '{{ validator_client_service_path }}/bin'
+validator_client_bin_path: '{{ validator_client_service_path }}/result/bin'
 validator_client_logs_link: '{{ validator_client_service_path }}/logs'
 validator_client_secrets_path: '{{ validator_client_data_path }}/secrets'
 validator_client_validators_path: '{{ validator_client_data_path }}/validators'
@@ -26,20 +26,9 @@ validator_client_update_timer_timeout: 3600
 validator_client_update_frequency: 'daily'
 validator_client_update_start_on_creation: true
 validator_client_update_restarts_service: true
-# Determind if the update method will be by building the binary or downloading it
-validator_client_update_build: '{{ validator_client_repo_branch != "stable" }}'
-# Update with Build method
-validator_client_update_build_script: '{{ validator_client_service_path }}/build.sh'
-validator_client_update_build_days_kept: 3
-validator_client_update_build_jobs: '{{ ansible_processor_vcpus / 2 | round(0, "ceil") }}'
-validator_client_update_build_log_level: 'TRACE'
-validator_client_update_build_nim_flags: >-
-  -d:noSignalHandler
-validator_client_update_build_nim_commit: '' # Defaults to what nimbus-build-system uses.
-# Update with Download method
-validator_client_update_download_script: '{{ validator_client_service_path }}/dl-binary.sh'
 
-validator_client_repo_url: 'https://github.com/status-im/nimbus-eth2'
+validator_client_repo: 'status-im/nimbus-eth2'
+validator_client_repo_url: 'https://github.com/{{ validator_client_repo }}'
 validator_client_repo_branch: 'stable'
 
 # General
@@ -93,3 +82,10 @@ validator_client_consul_check_timeout: '5s'
 validator_client_consul_success_before_passing: 0
 validator_client_consul_failures_before_warning: 1
 validator_client_consul_failures_before_critical: 2
+
+# Commit drift check
+validator_client_consul_commit_warn_age: 86400 # seconds = 1day
+validator_client_consul_commit_crit_age: 172800 # seconds = 2 days
+
+# Nix
+validator_client_nix_repo_url: 'git+https://github.com/status-im/nimbus-eth2'
