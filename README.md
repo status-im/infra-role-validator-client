@@ -76,24 +76,33 @@ A timer will be installed to build the image:
 ```
 To rebuild the image:
 ```sh
- > sudo systemctl start build-validator-client-mainnet-stable
- > sudo systemctl status build-validator-client-mainnet-stable
- ● build-validator-client-mainnet-stable.service - Build validator-client-mainnet-stable
-     Loaded: loaded (/etc/systemd/system/build-validator-client-mainnet-stable.service; enabled; vendor preset: enabled)
-     Active: inactive (dead) since Wed 2021-09-29 12:00:12 UTC; 2h 15min ago
-TriggeredBy: ● build-validator-client-mainnet-stable.timer
+ > sudo systemctl start update-validator-client-mainnet-stable
+ > sudo systemctl status update-validator-client-mainnet-stable
+○ update-validator-client-mainnet-unstable.service - Update validator-client-mainnet-unstable
+     Loaded: loaded (/etc/systemd/system/update-validator-client-mainnet-unstable.service; static)
+     Active: inactive (dead) since Mon 2026-05-18 14:50:09 UTC; 29min ago
+TriggeredBy: ● update-validator-client-mainnet-unstable.timer
        Docs: https://github.com/status-im/infra-role-systemd-timer
-    Process: 1212987 ExecStart=/data/validator-client-mainnet-stable/build.sh (code=exited, status=0/SUCCESS)
-   Main PID: 1212987 (code=exited, status=0/SUCCESS)
+    Process: 3502060 ExecStart=/nix/var/nix/profiles/default/bin/nix build --no-write-lock-file --refresh git+https://github.com/status-im/nimbus-eth2?submodules=1&ref=unstable#validator_client_gcc11 (code=exited, status=0/SUCCESS)
+    Process: 3508582 ExecStartPost=/bin/systemctl restart validator-client-mainnet-unstable.service (code=exited, status=0/SUCCESS)
+   Main PID: 3502060 (code=exited, status=0/SUCCESS)
+        CPU: 8.770s
 
-Sep 29 12:00:12 build.sh[1213054]: HEAD is now at 0b21ebfe readme: update toc
-Sep 29 12:00:12 build.sh[1212987]:  >>> Binary already built
-Sep 29 12:00:12 systemd[1]: build-validator-client-mainnet-stable.service: Succeeded.
-Sep 29 12:00:12 systemd[1]: Finished Build validator-client-mainnet-stable.
+May 18 14:43:59 geth-04.ih-eu-mda1.nimbus.mainnet nix[3502060]: Pass '--accept-flake-config' to trust it
+May 18 14:43:59 geth-04.ih-eu-mda1.nimbus.mainnet nix[3502060]: warning: ignoring untrusted flake configuration setting 'extra-trusted-public-keys'.
+May 18 14:43:59 geth-04.ih-eu-mda1.nimbus.mainnet nix[3502060]: Pass '--accept-flake-config' to trust it
+May 18 14:43:59 geth-04.ih-eu-mda1.nimbus.mainnet nix[3502060]: warning: not writing modified lock file of flake 'git+https://github.com/status-im/nimbus-eth2?ref=unstable&submodules=1':
+May 18 14:44:11 geth-04.ih-eu-mda1.nimbus.mainnet nix[3502060]: this derivation will be built:
+May 18 14:44:11 geth-04.ih-eu-mda1.nimbus.mainnet nix[3502060]:   /nix/store/9ffxqqvdllqvb210hid0jd1db6dcp3zz-nimbus-eth2-26.5.0-00000000.drv
+May 18 14:44:11 geth-04.ih-eu-mda1.nimbus.mainnet nix[3502060]: building '/nix/store/9ffxqqvdllqvb210hid0jd1db6dcp3zz-nimbus-eth2-26.5.0-00000000.drv'...
+May 18 14:50:09 geth-04.ih-eu-mda1.nimbus.mainnet systemd[1]: update-validator-client-mainnet-unstable.service: Deactivated successfully.
+May 18 14:50:09 geth-04.ih-eu-mda1.nimbus.mainnet systemd[1]: Finished Update validator-client-mainnet-unstable.
+May 18 14:50:09 geth-04.ih-eu-mda1.nimbus.mainnet systemd[1]: update-validator-client-mainnet-unstable.service: Consumed 8.770s CPU time.
+
 ```
 To check full build logs use:
 ```sh
-journalctl -u build-validator-client-mainnet-stable.service
+journalctl -u update-validator-client-mainnet-stable.service
 ```
 
 # Requirements
@@ -101,3 +110,4 @@ journalctl -u build-validator-client-mainnet-stable.service
 Due to being part of Status infra this role assumes availability of certain things:
 
 * The `iptables-persistent` module
+* Nix
