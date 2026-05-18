@@ -89,3 +89,4 @@ validator_client_consul_commit_crit_age: 172800 # seconds = 2 days
 
 # Nix
 validator_client_nix_repo_url: 'git+https://github.com/status-im/nimbus-eth2'
+validator_client_nix_flake_target: 'validator_client'
