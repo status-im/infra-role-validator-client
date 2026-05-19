@@ -21,6 +21,6 @@
     systemd_timer_timeout_sec: '{{ validator_client_update_timer_timeout }}'
     systemd_timer_work_dir: '{{ validator_client_service_path }}'
     systemd_timer_script_path: '/nix/var/nix/profiles/default/bin/nix'
-    systemd_timer_script_args: 'build --refresh "{{ validator_client_nix_repo_url }}?submodules=1&ref={{ validator_client_repo_branch }}#validator_client"'
+    systemd_timer_script_args: 'build --no-write-lock-file --refresh "{{ validator_client_nix_repo_url }}?submodules=1&ref={{ validator_client_repo_branch }}#{{ validator_client_nix_flake_target }}"'
     systemd_timer_exec_start_post:
       - '+/bin/systemctl restart {{ validator_client_service_name }}.service'
