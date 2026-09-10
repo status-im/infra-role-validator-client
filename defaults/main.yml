@@ -4,11 +4,15 @@ validator_client_service_path: '/data/{{ validator_client_service_name }}'
 validator_client_service_enabled: true
 validator_client_service_nofile_limit: 16384 # nextPowerOfTwo(number_of_validators + 1024)
 validator_client_data_path: '{{ validator_client_service_path }}/data'
+validator_client_flock_path: '{{ validator_client_service_path }}/process.lock'
 validator_client_repo_path: '{{ validator_client_service_path }}/repo'
 validator_client_bin_path: '{{ validator_client_service_path }}/result/bin'
 validator_client_logs_link: '{{ validator_client_service_path }}/logs'
 validator_client_secrets_path: '{{ validator_client_data_path }}/secrets'
 validator_client_validators_path: '{{ validator_client_data_path }}/validators'
+
+validator_client_flock_conflict_exit_code: 75
+validator_client_service_restart_sec: 5
 
 # Ability to prevernt restarts after service changes.
 # This is higher priority, than force_restart.

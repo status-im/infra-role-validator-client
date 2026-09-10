@@ -13,8 +13,13 @@ SyslogIdentifier={{ validator_client_service_name }}
 SyslogFacility=local6
 SyslogLevel=debug
 Restart=on-failure
+RestartSec={{ validator_client_service_restart_sec }}
 RestartPreventExitStatus={{ validator_client_doppelganger_exit_code }}
+{% if validator_client_doppelganger_detection | bool %}
 ExecStart={{ validator_client_bin_path }}/nimbus_validator_client \
+{% else %}
+ExecStart=/usr/bin/flock --no-fork --nonblock --conflict-exit-code={{ validator_client_flock_conflict_exit_code }} {{ validator_client_flock_path }} {{ validator_client_bin_path }}/nimbus_validator_client \
+{% endif %}
     --data-dir={{ validator_client_data_path }} \
     --secrets-dir={{ validator_client_secrets_path }} \
     --validators-dir={{ validator_client_validators_path }} \
